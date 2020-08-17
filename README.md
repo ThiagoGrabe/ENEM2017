@@ -165,9 +165,9 @@ It was created a correlation heatmap where social aspects such as [HDI](http://h
 
 The higher the HDI, better the average of ENEM score. It impacts people's life, because this exam in Brazil is the chosen one for all free universities and a great part of the population does not have condition to afford a private university.
 
-Another important result considering the Brazil regions is that South and Southeast have a higher average ENEM score compared to other regions. It also can be seen that São Paulo, Rio de Janeiro, Belo Horizonte and DF have the highest scores.
+Another important result considering the Brazil regions is that South and Southeast have a higher average ENEM score compared to other regions. It also can be seen that São Paulo, Paraná, Belo Horizonte and DF have the highest scores.
 
 ![BrazilMap-scores](https://github.com/ThiagoGrabe/ENEM2017/blob/master/img/BrazilMap-ENEMscore.png)
 
 
-For further insights we invite you to download the POWER BI Dashboard and explore by yourself.
+For further insights we invite you to download the POWER BI Dashboard and explore the analysis.
