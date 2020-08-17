@@ -128,3 +128,35 @@ The database is very simple and has a main table called _enem2017_ and 5 auxilia
 |TP_DEPENDENCIA_ADM_ESC       |numeric (__PK__)|
 |DESCRICAO|text|
 
+
+## How To
+
+To access the data and the analysis it is necessary to download the Power BI report
+
+    * [ENEM 2017 - POWER BI REPORT](https://github.com/ThiagoGrabe/ENEM2017/blob/master/enem2017_Report.pbix)
+    
+The database is instanciated on AWS RDS. All configuration properties are set in the [config.py](https://github.com/ThiagoGrabe/ENEM2017/blob/master/config.py) file.
+
+If you want to recriate the database the following frameworks/packages are necessary:
+
+    * Python 3.6
+        - pyspark
+        - numpy
+        - pandas
+        - matplotlib
+        - xlrd
+        - seaborn
+        - jupyter
+        
+     * Postgresql 12
+        - All queries are stored in the [query.txt](https://github.com/ThiagoGrabe/ENEM2017/blob/master/query.txt) file.
+        
+     * Power BI Desktop
+     
+ 
+     
+ ## Results
+ 
+ Some results are important to present. Brazil is a huge country with many different regions and social aspects. It is a unique and beautiful country, but also uneven.
+ 
+ 
