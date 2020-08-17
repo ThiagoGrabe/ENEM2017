@@ -1,0 +1,135 @@
+---------- Queries ------------
+
+--Subscriptions
+select e."SG_UF_RESIDENCIA" as "UF", c2."NA_MUNICIPIO_RESIDENCIA" as "City", count(e."NU_INSCRICAO" ) as "Subscriptions"
+from enem2017 e, cities c2 
+where c2."CO_MUNICIPIO_RESIDENCIA" = e."CO_MUNICIPIO_RESIDENCIA" 
+group by e."SG_UF_RESIDENCIA", e."CO_MUNICIPIO_RESIDENCIA" , c2."NA_MUNICIPIO_RESIDENCIA"
+
+
+select count(e."NU_INSCRICAO" )
+from enem2017 e 
+
+
+-- TOP 10 Scores
+SELECT rank_filter.*
+FROM (
+	SELECT e."NU_INSCRICAO", e."SG_UF_RESIDENCIA", e."CO_MUNICIPIO_RESIDENCIA" ,  (coalesce(e."NU_NOTA_MT",0)  + coalesce(e."NU_NOTA_REDACAO",0) + coalesce(e."NU_NOTA_LC",0)  + coalesce(e."NU_NOTA_CN",0)  + coalesce(e."NU_NOTA_CH",0))/5 as "Total score ENEM 2017", 
+      rank() OVER (
+          PARTITION BY e."CO_MUNICIPIO_RESIDENCIA" 
+          ORDER BY (coalesce(e."NU_NOTA_MT",0)  + coalesce(e."NU_NOTA_REDACAO",0) + coalesce(e."NU_NOTA_LC",0)  + coalesce(e."NU_NOTA_CN",0)  + coalesce(e."NU_NOTA_CH",0))/5  DESC
+      )
+    FROM enem2017 e
+    ) rank_filter WHERE RANK <=10
+    
+    
+-- WORST 10 Scores
+SELECT rank_filter.*
+FROM (
+	SELECT e."NU_INSCRICAO", e."SG_UF_RESIDENCIA", e."CO_MUNICIPIO_RESIDENCIA" ,  (coalesce(e."NU_NOTA_MT",0)  + coalesce(e."NU_NOTA_REDACAO",0) + coalesce(e."NU_NOTA_LC",0)  + coalesce(e."NU_NOTA_CN",0)  + coalesce(e."NU_NOTA_CH",0))/5 as "Total score ENEM 2017", 
+      rank() OVER (
+          PARTITION BY e."CO_MUNICIPIO_RESIDENCIA" 
+          ORDER BY (coalesce(e."NU_NOTA_MT",0)  + coalesce(e."NU_NOTA_REDACAO",0) + coalesce(e."NU_NOTA_LC",0)  + coalesce(e."NU_NOTA_CN",0)  + coalesce(e."NU_NOTA_CH",0))/5  asc 
+      )
+    FROM enem2017 e
+    ) rank_filter WHERE RANK <=10
+
+
+-- Average of scores
+select e."SG_UF_RESIDENCIA" as "UF", c."NA_MUNICIPIO_RESIDENCIA" as "City", e."TP_SEXO" as "Gender", et."DESCRICAO" as "School Type",
+cr."DESCRICAO" as "How do You declare yourself?", et2."DESCRICAO" as "Study kind" ,
+avg("NU_NOTA_REDACAO") as "Essay", avg("NU_NOTA_CH") as "Human Science",
+avg("NU_NOTA_CN" ) as "Nature Science", avg("NU_NOTA_LC" ) as "Speech&Languages", avg("NU_NOTA_MT" ) as "Mathmatics"
+from enem2017 e, escola_tipo et, cor_raca cr, cities c, ano_enem ae, ensino_tipo et2 
+where (e."CO_MUNICIPIO_RESIDENCIA" = c."CO_MUNICIPIO_RESIDENCIA")
+and (et."TP_DEPENDENCIA_ADM_ESC" = e."TP_DEPENDENCIA_ADM_ESC")
+and (cr."TP_COR_RACA" = e."TP_COR_RACA")
+and (ae."TP_ANO_CONCLUIU" = e."TP_ANO_CONCLUIU")
+and (et2."TP_ENSINO" = e."TP_ENSINO" )
+group by e."SG_UF_RESIDENCIA", c."NA_MUNICIPIO_RESIDENCIA", e."TP_SEXO", et."DESCRICAO", cr."DESCRICAO", eT2."DESCRICAO"
+
+
+-- Social indicators
+select * from cities c 
+
+
+--------- Creating Cities database ---------
+--DROP TABLE public.cities;
+
+CREATE TABLE public.cities
+(
+    "NA_MUNICIPIO_RESIDENCIA" text COLLATE pg_catalog."default",
+    "CO_MUNICIPIO_RESIDENCIA" numeric primary key,
+    "AREA_MUNICIPIO" numeric,
+    "POP_MUNICIPIO" numeric,
+    "IDH_MUNICIPIO" numeric,
+    "INCOME_MUNICIPIO_X1000" numeric,
+    "COST_MUNICIPIO_X1000" numeric,
+    "PIP_MUNICIPIO_PER_CAPITA" numeric
+    )
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.cities
+    OWNER to postgres;
+   
+   
+--------- Creating ENEM database ---------
+--DROP TABLE public.enem2017;   
+
+CREATE TABLE public.enem2017
+(
+    "NU_INSCRICAO" bigint primary key, 
+    "SG_UF_RESIDENCIA"  text COLLATE pg_catalog."default", 
+    "CO_MUNICIPIO_RESIDENCIA" numeric, 
+    "CO_MUNICIPIO_ESC" numeric, 
+    "TP_SEXO" numeric, 
+    "TP_COR_RACA" numeric, 
+    "TP_ENSINO" numeric, 
+    "TP_ESCOLA" numeric, 
+    "TP_ANO_CONCLUIU" numeric, 
+    "TP_LINGUA" numeric, 
+    "TP_DEPENDENCIA_ADM_ESC" numeric, 
+    "NU_NOTA_CN" numeric, 
+    "NU_NOTA_CH" numeric, 
+    "NU_NOTA_LC" numeric, 
+    "NU_NOTA_MT" numeric, 
+    "NU_NOTA_REDACAO" numeric
+    )
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.enem2017
+    OWNER to postgres;
+   
+   
+--------- Creating ensino_tipo database ---------
+--DROP TABLE public.ensino_tipo;
+
+CREATE TABLE public.ensino_tipo
+(
+    "TP_ENSINO" numeric ,
+    "DESCRICAO" text COLLATE pg_catalog."default"
+    )
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.ensino_tipo
+    OWNER to postgres;
+
+INSERT INTO public.ensino_tipo
+("TP_ENSINO", "DESCRICAO")
+VALUES(1, 'Ensino Regular');
+INSERT INTO public.ensino_tipo
+("TP_ENSINO", "DESCRICAO")
+VALUES(2, 'Educação Especial - Modalidade Substitutiva');
+INSERT INTO public.ensino_tipo
+("TP_ENSINO", "DESCRICAO")
+VALUES(3, 'Educação de Jovens e Adultos');
+
