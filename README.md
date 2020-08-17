@@ -31,7 +31,7 @@ With these two aspects, I intend to give an understanding of the following quest
 6. - Is gender also an important feature when looking to the scores?
 7. - People from public schools perform at the same level as private schools?
 
-At the end of this work, it will be presented some insights about the topic and the questions. Then, this work will try to answer all of them with some charts presentations to exemplify the results and support the arguments.
+At the end of this work, it will be presented some insights about the topic and the questions. Then, this work will try to answer all of them with some charts presentations to exemplify the results in a POWER BI dashboard.
 
 
 ## Data Modeling
@@ -133,13 +133,13 @@ The database is very simple and has a main table called _enem2017_ and 5 auxilia
 
 To access the data and the analysis it is necessary to download the Power BI report
 
-    [ENEM 2017 - POWER BI REPORT](https://github.com/ThiagoGrabe/ENEM2017/blob/master/enem2017_Report.pbix)
+   [ENEM 2017 - POWER BI REPORT](https://github.com/ThiagoGrabe/ENEM2017/blob/master/enem2017_Report.pbix)
     
 The database is instanciated on AWS RDS. All configuration properties are set in the [config.py](https://github.com/ThiagoGrabe/ENEM2017/blob/master/config.py) file.
 
 If you want to recriate the database the following frameworks/packages are necessary:
 
-    Python 3.6
+ Python 3.6
         - pyspark
         - numpy
         - pandas
@@ -148,15 +148,23 @@ If you want to recriate the database the following frameworks/packages are neces
         - seaborn
         - jupyter
         
-     Postgresql 12
-        - All queries are stored in the [query.txt](https://github.com/ThiagoGrabe/ENEM2017/blob/master/query.txt) file.
+ Postgresql 12
+    -   All queries are stored in the [query.txt](https://github.com/ThiagoGrabe/ENEM2017/blob/master/query.txt) file.
         
-     Power BI Desktop
+ Power BI Desktop
      
  
      
- ## Results
+ ## Results preview
  
- Some results are important to present. Brazil is a huge country with many different regions and social aspects. It is a unique and beautiful country, but also uneven.
- 
- 
+Some results are important to present. Brazil is a huge country with many different regions and social aspects. It is a unique and beautiful country, but also uneven.
+
+It was created a correlation heatmap where social aspects such as [HDI](http://hdr.undp.org/en/content/human-development-index-hdi), the total population, type of school, gender and gender identity.
+
+![corrHeatmap](https://github.com/ThiagoGrabe/ENEM2017/blob/master/img/CorrelationHeatmap.png)
+
+The higher the HDI, better the average of ENEM score. It impacts people's life, because this exam in Brazil is the chosen one for all free universities and a great part of the population does not have condition to afford a private university.
+
+Another important result considering the Brazil regions is that South and Southeast have a higher average ENEM score compared to other regions. It also can be seen that São Paulo, Rio de Janeiro, Belo Horizonte and DF have the highest scores.
+
+For further insights we invite you to download the POWER BI Dashboard and explore by yourself the presentation.
