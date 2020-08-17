@@ -133,13 +133,13 @@ The database is very simple and has a main table called _enem2017_ and 5 auxilia
 
 To access the data and the analysis it is necessary to download the Power BI report
 
-    * [ENEM 2017 - POWER BI REPORT](https://github.com/ThiagoGrabe/ENEM2017/blob/master/enem2017_Report.pbix)
+    [ENEM 2017 - POWER BI REPORT](https://github.com/ThiagoGrabe/ENEM2017/blob/master/enem2017_Report.pbix)
     
 The database is instanciated on AWS RDS. All configuration properties are set in the [config.py](https://github.com/ThiagoGrabe/ENEM2017/blob/master/config.py) file.
 
 If you want to recriate the database the following frameworks/packages are necessary:
 
-    * Python 3.6
+    Python 3.6
         - pyspark
         - numpy
         - pandas
@@ -148,10 +148,10 @@ If you want to recriate the database the following frameworks/packages are neces
         - seaborn
         - jupyter
         
-     * Postgresql 12
+     Postgresql 12
         - All queries are stored in the [query.txt](https://github.com/ThiagoGrabe/ENEM2017/blob/master/query.txt) file.
         
-     * Power BI Desktop
+     Power BI Desktop
      
  
      
