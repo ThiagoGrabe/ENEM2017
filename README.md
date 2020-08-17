@@ -100,10 +100,31 @@ The database is very simple and has a main table called _enem2017_ and 5 auxilia
 |COST_MUNICIPIO_X1000   |numeric|
 |PIB_MUNICIPIO_PER_CAPITA|numeric|
 
-3. _anoenem_ Table:
+3. _anoEnem_ Table:
 
 | Feature  | Type |
 | ------------- | ------------- |
 |TP_ANO_CONCLUIU       |numeric (__PK__)|
+|DESCRICAO|text|
+
+4. _ensinoTipo_ Table:
+
+| Feature  | Type |
+| ------------- | ------------- |
+|TP_ENSINO       |numeric (__PK__)|
+|DESCRICAO|text|
+
+5. _corRaca_ Table:
+
+| Feature  | Type |
+| ------------- | ------------- |
+|TP_COR_RACA       |numeric (__PK__)|
+|DESCRICAO|text|
+
+6. _escolaTipo Table:
+
+| Feature  | Type |
+| ------------- | ------------- |
+|TP_DEPENDENCIA_ADM_ESC       |numeric (__PK__)|
 |DESCRICAO|text|
 
