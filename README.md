@@ -167,4 +167,7 @@ The higher the HDI, better the average of ENEM score. It impacts people's life, 
 
 Another important result considering the Brazil regions is that South and Southeast have a higher average ENEM score compared to other regions. It also can be seen that São Paulo, Rio de Janeiro, Belo Horizonte and DF have the highest scores.
 
-For further insights we invite you to download the POWER BI Dashboard and explore by yourself the presentation.
+![BrazilMap-scores](https://github.com/ThiagoGrabe/ENEM2017/blob/master/img/BrazilMap-ENEMscore.png)
+
+
+For further insights we invite you to download the POWER BI Dashboard and explore by yourself.
