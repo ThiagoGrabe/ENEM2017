@@ -1,4 +1,4 @@
-PGHOST = 'enem-db.ckmkgojztt5a.sa-east-1.rds.amazonaws.com'
+PGHOST = 'XXXX'
 PGDATABASE = 'enem_db'
 PGUSER = 'postgres'
-PGPASSWORD = 'datasprints'
+PGPASSWORD = 'XXXXX'
